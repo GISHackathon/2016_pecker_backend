@@ -1,5 +1,7 @@
 from flask import Flask
 
+from user.authentication import *
+
 app = Flask(__name__)
 
 
