@@ -1,5 +1,6 @@
 
 
+from pecker.app import app
 
 
 @app.route('/')
