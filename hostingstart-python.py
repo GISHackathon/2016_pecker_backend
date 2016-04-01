@@ -1,5 +1,6 @@
 import sys
 import platform
+import flask
 
 def application(environ, start_response):
     start_response(b'200 OK', [(b'Content-Type', b'text/html')])
