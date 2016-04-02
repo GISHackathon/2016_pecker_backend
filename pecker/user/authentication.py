@@ -3,7 +3,7 @@ import requests
 import oauth2 as oauth
 import urlparse
 from flask import redirect
-from uuid import uuid
+import uuid
 
 @app.route('/login')
 def login():
