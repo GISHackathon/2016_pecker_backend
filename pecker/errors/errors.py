@@ -1,4 +1,4 @@
-import config
+from pecker import config
 import flask
 from flask import request
 from geotools.point import Point

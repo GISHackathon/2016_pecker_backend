@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-import config
+from pecker import config
 from TwitterAPI import TwitterAPI
 from model.error_db_handler import ErrorDbHandler
 
