@@ -16,9 +16,9 @@ class ErrorDbHandler(object):
             cls.doc_client.CreateDocument(
                 cls.error_coll_link,
                 {
-                    'id': kat_id,
-                    'x_coord': x_coord,
-                    'y_coord': y_coord
+                    'id': str(kat_id),
+                    'x_coord': str(x_coord),
+                    'y_coord': str(y_coord)
                 }
             )
         except HTTPFailure as e:
