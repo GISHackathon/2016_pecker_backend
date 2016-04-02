@@ -19,6 +19,6 @@ def import_errors():
         coord = f['geometry']['coordinates']
         kat_id = f['properties']['kod']
         ErrorDbHandler.import_error(kat_id, coord[0], coord[1])
-    return str(f)
+    return
 
 
