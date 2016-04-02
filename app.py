@@ -1,5 +1,9 @@
 from flask import Flask
 
+
+import sys
+sys.path.append('./pecker')
+
 app = Flask(__name__)
 
 from pecker.user.authentication import *
