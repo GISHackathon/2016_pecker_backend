@@ -2,3 +2,4 @@ flask
 twitterapi
 pydocumentdb
 requests
+oauth2
