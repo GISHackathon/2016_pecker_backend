@@ -4,6 +4,7 @@ import oauth2 as oauth
 import urlparse
 from flask import redirect
 import uuid
+from pecker.model.session_db_handler import SessionDbHandler
 
 @app.route('/login')
 def login():
