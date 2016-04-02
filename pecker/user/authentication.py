@@ -19,9 +19,17 @@ def login():
 
     # The OAuth Client request works just like httplib2 for the most part.
     resp, content = client.request(request_token_url, "GET")
-
+    
     results = urlparse.parse_qsl(content)
 
-    return redirect('https://api.twitter.com/oauth/authenticate?oauth_token=' + str(results[0][1]))
+    if results[1][0]=='oauth_verifier':
+        if results[0][1]==puvodni:
+            return "ok"
+        else   
+            return "Cannot log in."
+    else:
+        C = Cookie.SimpleCookie()
+        C["session_id"] = results[0][1]
+        return redirect('https://api.twitter.com/oauth/authenticate?oauth_token=' + str(results[0][1]))
 
    

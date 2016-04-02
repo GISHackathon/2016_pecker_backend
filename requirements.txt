@@ -3,3 +3,4 @@ twitterapi
 pydocumentdb
 requests
 oauth2
+uuid
