@@ -1,8 +1,6 @@
-
-
 from pecker.app import app
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+@app.route('/login')
+def login():
+    return 'login'

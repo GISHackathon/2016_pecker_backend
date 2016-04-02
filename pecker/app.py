@@ -1,17 +1,12 @@
 from flask import Flask
 
-#from pecker.user.authentication import *
-
-
 app = Flask(__name__)
 
-
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
-
+from pecker.user.authentication import *
+from pecker.errors.error_importer import *
+from pecker.errors.errors import *
 
 
 if __name__ == '__main__':
-    app.run(port=80)
+    app.run(port=80, debug=True)
 
