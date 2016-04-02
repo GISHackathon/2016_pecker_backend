@@ -4,12 +4,12 @@ from datetime import datetime
 
 from pecker import config
 from TwitterAPI import TwitterAPI
-from pecker.model.error_db_handler import ErrorDbHandler
+from pecker.model.correction_db_handler import CorrectionDbHandler
 
 from pecker.app import app
 
 
-@app.route('/errors/import')
+@app.route('/corrections/import')
 def import_errors():
     api = TwitterAPI(
         config.TW_CUSTOMER_KEY,
@@ -35,7 +35,7 @@ def process_tweet(tweet):
         return
     tweet_type = get_tweet_type(tweet)
 
-    ErrorDbHandler.import_tweet(
+    CorrectionDbHandler.import_tweet(
         tweet['id_str'],
         tweet['user']['id'],
         tweet['text'],
