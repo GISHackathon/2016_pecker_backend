@@ -1,5 +1,5 @@
 from pecker.app import app
-from requests import requests
+import requests
 
 @app.route('/login')
 def login():
