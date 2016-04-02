@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from TwitterAPI import TwitterAPI
-from pecker import config
-from pecker.app import app
+import config
+from app import app
 from datetime import datetime
 import flask
 
-from pecker.model.error_db_handler import ErrorDbHandler
+from model.error_db_handler import ErrorDbHandler
 
 
 @app.route('/errors/import')

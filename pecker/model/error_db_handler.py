@@ -1,5 +1,5 @@
 import pydocumentdb.document_client as document_client
-from pecker import config
+import config
 from pydocumentdb.errors import HTTPFailure
 
 
