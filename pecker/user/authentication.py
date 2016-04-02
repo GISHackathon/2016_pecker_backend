@@ -5,6 +5,7 @@ import urlparse
 from flask import redirect
 import uuid
 from pecker.model.session_db_handler import SessionDbHandler
+import Cookie
 
 @app.route('/login')
 def login():
