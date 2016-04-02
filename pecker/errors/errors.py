@@ -1,11 +1,11 @@
-from app import app
-from model.error_db_handler import ErrorDbHandler
+import config
 import flask
 from flask import request
-
 from geotools.point import Point
 from geotools.point_buffer import PointBuffer
-import config
+from model.error_db_handler import ErrorDbHandler
+
+from pecker.app import app
 
 
 @app.route('/errors/get-all')
