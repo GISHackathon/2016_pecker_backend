@@ -1,4 +1,4 @@
-from app import app
+from pecker.app import app
 
 
 @app.route('/login')
