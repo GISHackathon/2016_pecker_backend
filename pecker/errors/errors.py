@@ -4,7 +4,7 @@ from flask import request
 from pecker.geotools.point import Point
 from pecker.geotools.point_buffer import PointBuffer
 from pecker.model.error_db_handler import ErrorDbHandler
-
+from pecker.geotools.goujeson_builder import GeojsonBuilder
 from pecker.app import app
 
 
@@ -33,8 +33,8 @@ def get_errors_by_location():
         p = Point(error['x_coord'], error['y_coord'])
         if not center_buffer.is_point_within(p):
             errors.pop(i)
-    res = {'errors': errors}
-    return flask.jsonify(**res)
+    gj_errors = GeojsonBuilder.build_geojson(errors)
+    return flask.jsonify(**gj_errors)
 
 
 

@@ -4,14 +4,15 @@ from flask import request
 from pecker.geotools.point import Point
 from pecker.geotools.point_buffer import PointBuffer
 from pecker.model.correction_db_handler import CorrectionDbHandler
-
+from pecker.geotools.goujeson_builder import GeojsonBuilder
 from pecker.app import app
 
 
 @app.route('/corrections/all')
 def get_all_corrections():
-    res = {'corrections': CorrectionDbHandler.get_all_errors()}
-    return flask.jsonify(**res)
+    corrections = CorrectionDbHandler.get_all_errors()
+    gj_corrections = GeojsonBuilder.build_geojson(corrections)
+    return flask.jsonify(**gj_corrections)
 
 
 @app.route('/corrections/get-by-location', methods=['GET', 'POST'])
@@ -33,8 +34,8 @@ def get_corrections_by_location():
         p = Point(correction['x_coord'], correction['y_coord'])
         if not center_buffer.is_point_within(p):
             corrections.pop(i)
-    res = {'corrections': corrections}
-    return flask.jsonify(**res)
+    gj_corrections = GeojsonBuilder.build_geojson(corrections)
+    return flask.jsonify(**gj_corrections)
 
 
 
