@@ -9,6 +9,8 @@ app = Flask(__name__)
 from pecker.user.authentication import *
 from pecker.corrections.correction_importer import *
 from pecker.corrections.corrections import *
+from pecker.errors.error_importer import *
+from pecker.errors.errors import *
 
 
 if __name__ == '__main__':

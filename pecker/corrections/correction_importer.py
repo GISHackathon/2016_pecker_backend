@@ -10,7 +10,7 @@ from pecker.app import app
 
 
 @app.route('/corrections/import')
-def import_errors():
+def import_corrections():
     api = TwitterAPI(
         config.TW_CUSTOMER_KEY,
         config.TW_CUSTOMER_SECRET,
@@ -23,7 +23,6 @@ def import_errors():
         return 'Twitter request error...'
 
     for t in tweet_set:
-        #return flask.jsonify(**t)
         process_tweet(t)
 
     return '<br/>'.join(['%s:: %s' % (key, value) for (key, value) in t.items()])
