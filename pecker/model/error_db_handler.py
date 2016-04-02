@@ -16,7 +16,7 @@ class ErrorDbHandler(object):
             cls.doc_client.CreateDocument(
                 cls.error_coll_link,
                 {
-                    'kat_id': kat_id,
+                    'id': kat_id,
                     'x_coord': x_coord,
                     'y_coord': y_coord
                 }

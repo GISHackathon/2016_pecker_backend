@@ -23,6 +23,7 @@ def import_corrections():
         return 'Twitter request error...'
 
     for t in tweet_set:
+        print t
         process_tweet(t)
     return ''
 
@@ -53,11 +54,11 @@ def get_coordinates(tweet):
         x_coord = tweet['geo']['coordinates'][0]
         y_coord = tweet['geo']['coordinates'][1]
     elif tweet['place']:
-        coords = tweet['place']['bounding_box']['coordinates']
-        x_max = coords[-1][1]
-        y_min = coords[-1][0]
-        x_min = coords[1][1]
-        y_max = coords[1][0]
+        coords = tweet['place']['bounding_box']['coordinates'][0]
+        x_max = coords[-1][0]
+        y_min = coords[-1][1]
+        x_min = coords[1][0]
+        y_max = coords[1][1]
         x_coord = (x_min + x_max) / 2
         y_coord = (y_min + y_max) / 2
     else:
