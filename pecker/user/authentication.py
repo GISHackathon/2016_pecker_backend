@@ -3,9 +3,12 @@ import requests
 import oauth2 as oauth
 import urlparse
 from flask import redirect
+from uuid import uuid
 
 @app.route('/login')
 def login():
+    # init cookies
+    C = Cookie.SimpleCookie()
 
     # Create your consumer with the proper key/secret.
     consumer = oauth.Consumer(key="QH9G5kSSPpFCsZ0Brs9p3Ntvw", 
@@ -23,13 +26,17 @@ def login():
     results = urlparse.parse_qsl(content)
 
     if results[1][0]=='oauth_verifier':
+        uid = C["session_id"]
+        C = Cookie.SimpleCookie()
+        puvodni = SessionDbHandler.get_session(uid, "oauth_token")
         if results[0][1]==puvodni:
             return "ok"
-        else   
+        else: 
             return "Cannot log in."
     else:
-        C = Cookie.SimpleCookie()
-        C["session_id"] = results[0][1]
+        uid = uuid.uuid4()
+        C["session_id"] = uid
+        SessionDbHandler.create_session(uid, "oauth_token", results[0][1])
         return redirect('https://api.twitter.com/oauth/authenticate?oauth_token=' + str(results[0][1]))
 
    
