@@ -1,9 +1,9 @@
 from pecker import config
 import flask
 from flask import request
-from geotools.point import Point
-from geotools.point_buffer import PointBuffer
-from model.error_db_handler import ErrorDbHandler
+from pecker.geotools.point import Point
+from pecker.geotools.point_buffer import PointBuffer
+from pecker.model.error_db_handler import ErrorDbHandler
 
 from pecker.app import app
 

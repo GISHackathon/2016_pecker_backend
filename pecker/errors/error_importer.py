@@ -4,7 +4,7 @@ from datetime import datetime
 
 from pecker import config
 from TwitterAPI import TwitterAPI
-from model.error_db_handler import ErrorDbHandler
+from pecker.model.error_db_handler import ErrorDbHandler
 
 from pecker.app import app
 
