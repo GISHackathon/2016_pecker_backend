@@ -6,7 +6,7 @@ import config
 from TwitterAPI import TwitterAPI
 from model.error_db_handler import ErrorDbHandler
 
-from pecker.app import app
+from app import app
 
 
 @app.route('/errors/import')
