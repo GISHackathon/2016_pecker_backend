@@ -21,6 +21,6 @@ def login():
 
     results = urlparse.parse_qsl(content)
 
-    return results
+    return dict(results)
 
    
