@@ -1,7 +1,7 @@
 from pecker.app import app
 import requests
 import oauth2 as oauth
-from urlparse import urlparse
+import urlparse
 
 @app.route('/login')
 def login():
