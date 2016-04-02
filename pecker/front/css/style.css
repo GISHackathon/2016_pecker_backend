@@ -1,0 +1,34 @@
+#map {
+    position:fixed;
+    top:0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    overflow: hidden;
+}
+.pckr-feature-wrapperImg{
+   text-align: center;
+}
+.pckr-feature-img{
+    width: 200px;
+}
+
+.pckr-feature-desc{
+font-weight: bold;
+}
+
+.pckr-feature-panoramaLink{
+    display: block;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.pckr-feature-userLink{
+    display: block;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.panorama{
+cursor: hand;
+}
