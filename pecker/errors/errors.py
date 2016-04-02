@@ -10,8 +10,9 @@ from pecker.app import app
 
 @app.route('/errors/all')
 def get_all_errors():
-    res = {'corrections': ErrorDbHandler.get_all_errors()}
-    return flask.jsonify(**res)
+    errors = ErrorDbHandler.get_all_errors()
+    gj_errors = GeojsonBuilder.build_geojson(errors)
+    return flask.jsonify(**gj_errors)
 
 
 @app.route('/errors/get-by-location', methods=['GET', 'POST'])
