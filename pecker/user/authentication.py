@@ -36,7 +36,7 @@ def login():
         else: 
             return "Cannot log in."
     else:
-        uid = uuid.uuid4()
+        uid = str(uuid.uuid4())
         C["session_id"] = uid
         SessionDbHandler.create_session(uid, "oauth_token", results[0][1])
         return redirect('https://api.twitter.com/oauth/authenticate?oauth_token=' + str(results[0][1]))
