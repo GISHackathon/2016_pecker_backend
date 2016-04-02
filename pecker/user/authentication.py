@@ -3,6 +3,7 @@ import requests
 import oauth2 as oauth
 import urlparse
 from flask import redirect
+from flask import request
 import uuid
 from pecker.model.session_db_handler import SessionDbHandler
 import Cookie
