@@ -1,4 +1,4 @@
-
+import copy
 
 class GeojsonBuilder(object):
     geojson_skeleton = {
@@ -17,11 +17,11 @@ class GeojsonBuilder(object):
 
     @classmethod
     def build_geojson(cls, features):
-        tmp_geojson = dict(cls.geojson_skeleton)
+        tmp_geojson = copy.deepcopy(cls.geojson_skeleton)
         for f in features:
             if not ('x_coord' in f.keys()) or not ('y_coord' in f.keys()):
                 continue
-            tmp_feature = dict(cls.feature_skeleton)
+            tmp_feature = copy.deepcopy(cls.feature_skeleton)
             tmp_feature['geometry']['coordinates'] = [f['x_coord'], f['y_coord']]
             del f['x_coord']
             del f['y_coord']
