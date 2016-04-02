@@ -7,8 +7,8 @@ sys.path.append('..')
 app = Flask(__name__)
 
 from pecker.user.authentication import *
-from pecker.errors.error_importer import *
-from pecker.errors.errors import *
+from pecker.corrections.correction_importer import *
+from pecker.corrections.corrections import *
 
 
 if __name__ == '__main__':

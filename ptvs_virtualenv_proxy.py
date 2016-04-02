@@ -32,7 +32,7 @@ else:
         return value.encode(sys.getfilesystemencoding())
 
 def log(txt):
-    """Logs fatal errors to a log file if WSGI_LOG env var is defined"""
+    """Logs fatal corrections to a log file if WSGI_LOG env var is defined"""
     log_file = os.environ.get('WSGI_LOG')
     if log_file:
         f = open(log_file, 'a+')

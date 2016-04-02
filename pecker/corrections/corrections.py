@@ -3,19 +3,19 @@ import flask
 from flask import request
 from pecker.geotools.point import Point
 from pecker.geotools.point_buffer import PointBuffer
-from pecker.model.error_db_handler import ErrorDbHandler
+from pecker.model.correction_db_handler import CorrectionDbHandler
 
 from pecker.app import app
 
 
-@app.route('/errors/get-all')
-def get_all_errors():
-    res = {'errors': ErrorDbHandler.get_all_errors()}
+@app.route('/corrections/all')
+def get_all_corrections():
+    res = {'corrections': CorrectionDbHandler.get_all_errors()}
     return flask.jsonify(**res)
 
 
-@app.route('/errors/get-by-location', methods=['GET', 'POST'])
-def get_errors_by_location():
+@app.route('/corrections/get-by-location', methods=['GET', 'POST'])
+def get_corrections_by_location():
     if request.method == 'POST':
         center = Point(
             request.form['x_coord'],
@@ -27,13 +27,13 @@ def get_errors_by_location():
             request.args.get('y_coord')
         )
 
-    errors = ErrorDbHandler.get_all_errors()
+    corrections = CorrectionDbHandler.get_all_errors()
     center_buffer = PointBuffer(center, config.LOC_BUFFER_RADIUS)
-    for i, error in enumerate(errors):
-        p = Point(error['x_coord'], error['y_coord'])
+    for i, correction in enumerate(corrections):
+        p = Point(correction['x_coord'], correction['y_coord'])
         if not center_buffer.is_point_within(p):
-            errors.pop(i)
-    res = {'errors': errors}
+            corrections.pop(i)
+    res = {'corrections': corrections}
     return flask.jsonify(**res)
 
 
