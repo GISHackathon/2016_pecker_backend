@@ -20,6 +20,6 @@ def login():
     resp, content = client.request(request_token_url, "GET")
 
     
-    return dict(content)
+    return type(content)
 
    
