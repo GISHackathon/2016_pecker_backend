@@ -4,7 +4,7 @@ pckr.Errors =  function(data) {
 
 
     pckr.Errors._data = data;
-    
+
     pckr.Errors.createLayer();
 
 };
@@ -21,7 +21,7 @@ pckr.Errors.createLayer = function() {
 
 pckr.Errors.onEachFeature = function(feature, layer) {
 
-    layer.setIcon(L.icon.mapkey({icon:"fire",background:"#ef0000",size:40}));
+    layer.setIcon(L.icon.mapkey({icon:"flag",background:"#ef0000",size:32}));
 
     var wrapper = $('<div>');
 

@@ -26,7 +26,7 @@ pckr.Corrections.createLayer = function() {
 
 pckr.Corrections.onEachFeature = function(feature, layer) {
 
-    layer.setIcon(L.icon.mapkey({icon:"flag",background:"#41ad2b",size:40}));
+    layer.setIcon(L.icon.mapkey({icon:"flag",background:"#41ad2b",size:32}));
 
     var wrapper = $('<div>');
 
@@ -43,6 +43,10 @@ pckr.Corrections.onEachFeature = function(feature, layer) {
         .html(properties.text)
         .appendTo(wrapper)
         .on('click',function(){console.log('ahoj')});
+    
+    var  type = $('<div>')
+        .html('TYPE: ' +properties.type)
+        .appendTo(wrapper);
 
     var pnrm = $('<a>',{class: 'pckr-feature-panoramaLink'})
         .html('MAPY.CZ PANORAMA')
@@ -51,10 +55,6 @@ pckr.Corrections.onEachFeature = function(feature, layer) {
 
     var user = $('<a>',{href:'https://twitter.com/intent/user?user_id='+properties.user_id, target:'blanc_', class: 'pckr-feature-userLink'})
         .html('USER')
-        .appendTo(wrapper);
-
-    var  type = $('<div>')
-        .html('TYPE: ' +properties.type)
         .appendTo(wrapper);
 
     var ruian = $('<a>',{href:'http://reklamace.cuzk.cz/formular/index.php?logged=-3', target:'blanc_', class: 'pckr-feature-userLink'})
