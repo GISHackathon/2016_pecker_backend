@@ -24,7 +24,7 @@ def import_corrections():
 
     for t in tweet_set:
         process_tweet(t)
-    return
+    return ''
 
 
 def process_tweet(tweet):
