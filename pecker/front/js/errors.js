@@ -4,10 +4,7 @@ pckr.Errors =  function(data) {
 
 
     pckr.Errors._data = data;
-
-
-
-
+    
     pckr.Errors.createLayer();
 
 };
@@ -30,29 +27,11 @@ pckr.Errors.onEachFeature = function(feature, layer) {
 
     var properties = feature.properties;
 
-    var wrapperImg = $('<div>',{class: 'pckr-feature-wrapperImg'})
-        .appendTo(wrapper);
 
-    var img = $('<img>',{src:properties.img_url, class: 'pckr-feature-img'})
-        .appendTo(wrapperImg);
-
-
-    var desc = $('<div>',{class: 'pckr-feature-desc'})
-        .html(properties.text)
-        .appendTo(wrapper);
-
-    var pnrm = $('<a>',{class: 'pckr-feature-panoramaLink'})
-        .html('MAPY.CZ PANORAMA')
+    var pnrm = $('<div>',{class: 'pckr-feature-panoramaLink'})
+        .html('id: '+ properties.id)
         .appendTo(wrapper)
-        .on('click',function(){pckr.Corrections.createPanorama(feature)});
 
-    var user = $('<a>',{href:'https://twitter.com/intent/user?user_id='+properties.user_id, target:'blanc_', class: 'pckr-feature-userLink'})
-        .html('USER')
-        .appendTo(wrapper);
-
-    var ruian = $('<a>',{href:'http://reklamace.cuzk.cz/formular/index.php?logged=-3', target:'blanc_', class: 'pckr-feature-userLink'})
-        .html('RIUAN')
-        .appendTo(wrapper);
 
     layer.bindPopup(wrapper[0]);
 

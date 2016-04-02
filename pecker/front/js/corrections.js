@@ -14,10 +14,11 @@ pckr.Corrections =  function(data) {
 
 pckr.Corrections._corrections = [];
 
+
 pckr.Corrections.createLayer = function() {
 
 
-    L.geoJson(pckr.Corrections._corrections, {
+    var geojson = L.geoJson(pckr.Corrections._corrections, {
         onEachFeature: pckr.Corrections.onEachFeature
     }).addTo(pckr.Map._map);
 
@@ -32,7 +33,7 @@ pckr.Corrections.onEachFeature = function(feature, layer) {
     var properties = feature.properties;
 
     var wrapperImg = $('<div>',{class: 'pckr-feature-wrapperImg'})
-    .appendTo(wrapper);
+        .appendTo(wrapper);
 
     var img = $('<img>',{src:properties.img_url, class: 'pckr-feature-img'})
         .appendTo(wrapperImg)
@@ -50,6 +51,10 @@ pckr.Corrections.onEachFeature = function(feature, layer) {
 
     var user = $('<a>',{href:'https://twitter.com/intent/user?user_id='+properties.user_id, target:'blanc_', class: 'pckr-feature-userLink'})
         .html('USER')
+        .appendTo(wrapper);
+
+    var  type = $('<div>')
+        .html('TYPE: ' +properties.type)
         .appendTo(wrapper);
 
     var ruian = $('<a>',{href:'http://reklamace.cuzk.cz/formular/index.php?logged=-3', target:'blanc_', class: 'pckr-feature-userLink'})
@@ -83,7 +88,7 @@ pckr.Corrections.createPanorama = function(feature){
 
         var data = place.getData();
 
-       window.open('https://mapy.cz/zakladni?z=18&pid='+data.pid + '&source=coor&id='+lon+'%2C'+lat)
+        window.open('https://mapy.cz/zakladni?z=18&pid='+data.pid + '&source=coor&id='+lon+'%2C'+lat)
         panoramaScene.show(place);
 
     }, function() {
