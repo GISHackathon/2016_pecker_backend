@@ -21,6 +21,6 @@ def login():
 
     results = urlparse.parse_qsl(content)
 
-    return redirect('https://api.twitter.com/oauth/authenticate?oauth_token='+oauth_token)
+    return redirect('https://api.twitter.com/oauth/authenticate')
 
    
