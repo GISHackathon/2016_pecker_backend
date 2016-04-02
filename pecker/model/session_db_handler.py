@@ -10,7 +10,7 @@ class SessionDbHandler(object):
     session_coll_link = config.DB_DATABASE_LINK + config.DB_SESSIONS_LINK
 
     @classmethod
-    def create_session(session_id, key, value):
+    def create_session(cls, session_id, key, value):
         try:
             cls.doc_client.CreateDocument(
                 cls.error_coll_link,
@@ -27,7 +27,7 @@ class SessionDbHandler(object):
                 print 'Already in DB...'
 
     @classmethod
-    def get_session(session_id, key):
+    def get_session(cls, session_id, key):
         collections = list(cls.doc_client.QueryCollections(
             database_link,
             {
