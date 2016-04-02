@@ -25,8 +25,6 @@ def import_corrections():
     for t in tweet_set:
         process_tweet(t)
 
-    return '<br/>'.join(['%s:: %s' % (key, value) for (key, value) in t.items()])
-
 
 def process_tweet(tweet):
     x_coord, y_coord = get_coordinates(tweet)
