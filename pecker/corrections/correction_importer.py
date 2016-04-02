@@ -46,11 +46,11 @@ def process_tweet(tweet):
 
 def get_coordinates(tweet):
     if tweet['coordinates']:
-        x_coord = tweet['coordinates']['coordinates'][1]
-        y_coord = tweet['coordinates']['coordinates'][0]
+        x_coord = tweet['coordinates']['coordinates'][0]
+        y_coord = tweet['coordinates']['coordinates'][1]
     elif tweet['geo']:
-        x_coord = tweet['geo']['coordinates'][1]
-        y_coord = tweet['geo']['coordinates'][0]
+        x_coord = tweet['geo']['coordinates'][0]
+        y_coord = tweet['geo']['coordinates'][1]
     elif tweet['place']:
         coords = tweet['place']['bounding_box']['coordinates']
         x_max = coords[-1][1]

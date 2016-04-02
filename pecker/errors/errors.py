@@ -4,7 +4,7 @@ from flask import request
 from pecker.geotools.point import Point
 from pecker.geotools.point_buffer import PointBuffer
 from pecker.model.error_db_handler import ErrorDbHandler
-from pecker.geotools.goujeson_builder import GeojsonBuilder
+from pecker.geotools.geojson_builder import GeojsonBuilder
 from pecker.app import app
 
 
