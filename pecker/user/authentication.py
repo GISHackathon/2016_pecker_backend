@@ -19,7 +19,6 @@ def login():
     # The OAuth Client request works just like httplib2 for the most part.
     resp, content = client.request(request_token_url, "GET")
 
-    #parts = parse_qs(content)
 
     return content
 
