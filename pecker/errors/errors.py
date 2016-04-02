@@ -5,7 +5,7 @@ from geotools.point import Point
 from geotools.point_buffer import PointBuffer
 from model.error_db_handler import ErrorDbHandler
 
-from app import app
+from pecker.app import app
 
 
 @app.route('/errors/get-all')
