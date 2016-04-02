@@ -2,6 +2,7 @@ from pecker.app import app
 import requests
 import oauth2 as oauth
 import urlparse
+from flask import redirect
 
 @app.route('/login')
 def login():
