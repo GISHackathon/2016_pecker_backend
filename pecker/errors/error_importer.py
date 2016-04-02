@@ -18,7 +18,7 @@ def import_errors():
     for f in data_json['features'][:config.IMP_ERR_COUNT]:
         coord = f['geometry']['coordinates']
         kat_id = f['properties']['kod']
-        ErrorDbHandler.import_error(kat_id, coord[1], coord[0])
+        ErrorDbHandler.import_error(kat_id, coord[0], coord[1])
     return str(f)
 
 
