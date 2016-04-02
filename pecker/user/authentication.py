@@ -1,7 +1,7 @@
 from pecker.app import app
 import requests
 import oauth2 as oauth
-
+from urlparse import urlparse
 
 @app.route('/login')
 def login():
@@ -18,6 +18,9 @@ def login():
 
     # The OAuth Client request works just like httplib2 for the most part.
     resp, content = client.request(request_token_url, "GET")
-    return content
+
+    parts = parse_qs(content)
+
+    return parts
 
    
