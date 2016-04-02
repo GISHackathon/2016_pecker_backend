@@ -13,7 +13,7 @@ class SessionDbHandler(object):
     def create_session(cls, session_id, key, value):
         try:
             cls.doc_client.CreateDocument(
-                cls.error_coll_link,
+                cls.session_coll_link,
                 {
                     'session_id': session_id,
                     'key': key,
@@ -28,18 +28,11 @@ class SessionDbHandler(object):
 
     @classmethod
     def get_session(cls, session_id, key):
-        collections = list(cls.doc_client.QueryCollections(
-            database_link,
-            {
-                "query": "SELECT * FROM r WHERE r.session_id=@sesssion_id AND key=@key",
-                "parameters": [
-                    { "name":"@session_id", "value": session_id },
-                    { "name":"@key", "value": key }
-                ]
-            }
-        ))
+        print cls.session_coll_link
+        sessions = cls.doc_client.ReadDocuments(cls.session_coll_link)
 
-        if len(collections) > 0:
-            return collections[0]
-        else:
-            print('No collection found.')
+        for session in list(sessions):
+            if session['session_id']==session_id and session['key']==key:
+                return session['value']
+
+        return ''
