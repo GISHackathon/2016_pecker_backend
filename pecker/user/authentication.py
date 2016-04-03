@@ -1,47 +1,66 @@
 from pecker.app import app
-import requests
-import oauth2 as oauth
 import urlparse
 from flask import redirect
 from flask import request
-import uuid
-from pecker.model.session_db_handler import SessionDbHandler
-import Cookie
+import oauth2 as oauth
+from pecker import config
+from flask import session
+from TwitterAPI import TwitterAPI
+
+consumer_key = config.TW_CUSTOMER_KEY
+consumer_secret = config.TW_CUSTOMER_SECRET
+
+request_token_url = 'https://api.twitter.com/oauth/request_token'
+access_token_url = 'https://api.twitter.com/oauth/access_token'
+authorize_url = 'https://api.twitter.com/oauth/authorize'
+
+consumer = oauth.Consumer(consumer_key, consumer_secret)
+client = oauth.Client(consumer)
 
 @app.route('/login')
 def login():
-    # init cookies
-    C = Cookie.SimpleCookie()
+    resp, content = client.request(request_token_url, "GET")
+    if resp['status'] != '200':
+        raise Exception("Invalid response %s." % resp['status'])
 
-    if request.args.get('oauth_verifier')!='':
-        uid = C["session_id"]
-        C = Cookie.SimpleCookie()
-        puvodni = SessionDbHandler.get_session(uid, "oauth_token")
-        if request.args.get('oauth_token')==puvodni:
-            return "ok"
-        else: 
-            return "Cannot log in."
+    request_token = dict(urlparse.parse_qsl(content))
 
+    session["oauth_token"] = request_token['oauth_token']
+    session["oauth_token_secret"] = request_token['oauth_token_secret']
+
+    session.save()
+
+    return redirect(authorize_url + "?oauth_token=" + request_token['oauth_token'])
+
+
+@app.route('/login2')
+def login2():
+
+    oauth_token = request.args.get('oauth_token')
+    oauth_verifier = request.args.get('oauth_verifier')
+
+    token = oauth.Token(session['oauth_token'],
+                        session['oauth_token_secret'])
+    token.set_verifier(oauth_verifier)
+    client = oauth.Client(consumer, token)
+
+    resp, content = client.request(access_token_url, "POST")
+    access_token = dict(urlparse.parse_qsl(content))
+
+    if len(access_token)==0:
+        return "Autorizacni token vyprsel, prihlaste se prosim znovu."
     else:
 
-        # Create your consumer with the proper key/secret.
-        consumer = oauth.Consumer(key="QH9G5kSSPpFCsZ0Brs9p3Ntvw", 
-            secret="qDcFA4afHRo3VJvvANQ3BTITHg2GdQYTGzATpth5caYmmTk9dO")
+        # zde je jiz dostupne username, ale pro vice info o uzivateli jeste nasleduje request na account/verify_credentials
+        username = access_token["screen_name"]
 
-        # Request token URL for Twitter.
-        request_token_url = "https://api.twitter.com/oauth/request_token"
+        token2 = oauth.Token(access_token["oauth_token"],
+                             access_token["oauth_token_secret"])
 
-        # Create our client.
-        client = oauth.Client(consumer)
+        client2 = oauth.Client(consumer, token2)
+        resp2, content2 = client2.request("https://api.twitter.com/1.1/account/verify_credentials.json", "GET")
 
-        # The OAuth Client request works just like httplib2 for the most part.
-        resp, content = client.request(request_token_url, "GET")
+        return str(content2)
 
-        results = urlparse.parse_qsl(content)
-
-        uid = str(uuid.uuid4())
-        C["session_id"] = uid
-        SessionDbHandler.create_session(uid, "oauth_token", results[0][1])
-        return redirect('https://api.twitter.com/oauth/authenticate?oauth_token=' + str(results[0][1]))
 
    

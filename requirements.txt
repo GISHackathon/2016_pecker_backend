@@ -4,3 +4,4 @@ pydocumentdb
 requests
 oauth2
 uuid
+beaker
