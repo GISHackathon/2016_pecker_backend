@@ -6,6 +6,8 @@ import oauth2 as oauth
 from pecker import config
 from flask import session
 from TwitterAPI import TwitterAPI
+from pecker.model.user_db_handler import UserDbHandler
+import json
 
 consumer_key = config.TW_CUSTOMER_KEY
 consumer_secret = config.TW_CUSTOMER_SECRET
@@ -60,7 +62,14 @@ def login2():
         client2 = oauth.Client(consumer, token2)
         resp2, content2 = client2.request("https://api.twitter.com/1.1/account/verify_credentials.json", "GET")
 
+        # save user details to the db
+        save_user_to_db(json.loads(content2))
+
         return str(content2)
+
+
+def save_user_to_db(user_data):
+    UserDbHandler.create_user((user_data))
 
 
    
